@@ -7,41 +7,40 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "Userdetails.db";
+public class DatabaseHelper  extends SQLiteOpenHelper {
+
     public static final String LOGIN_TABLE = "LOGIN_TABLE";
-    public static final String USERNAME = "USERNAME";
-    public static final String PASSWORD = "PASSWORD";
+    public static final String Column_USERNAME = "username";
+    public static final String Column_PASSWORD = "password";
+    public static final String Column_ID = "ID";
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, "Userdetails.db", null, 1);
-        SQLiteDatabase db = this.getWritableDatabase();
+        super(context, "UserDetails.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + LOGIN_TABLE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT," + USERNAME + " TEXT, " + PASSWORD + " CHAR)";
+        String createtableStatement = "CREATE TABLE " + LOGIN_TABLE + " (" + Column_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Column_USERNAME + " TEXT, " + Column_PASSWORD + " INT)";
 
-        db.execSQL(createTableStatement);
+        db.execSQL(createtableStatement);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+ LOGIN_TABLE);
-        onCreate(db);
+
     }
-    public String insertData(String username, Character password){
+    public boolean addOne(UserModel userModel) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(USERNAME,USERNAME);
-        contentValues.put(PASSWORD,PASSWORD);
+        ContentValues cv = new ContentValues();
 
-        long result = db.insert(LOGIN_TABLE,null,contentValues);
-        if(result == -1)
-            return "Welcome t Tour Guide App";
-        else
-            return "Invalid Credentials ";
+        cv.put(Column_USERNAME, userModel.getUsername());
+        cv.put(Column_PASSWORD, userModel.getPassword());
 
+        long insert = db.insert(LOGIN_TABLE, null, cv);
+        if (insert == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
-
 }
