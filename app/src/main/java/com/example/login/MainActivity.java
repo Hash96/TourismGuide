@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    DatabaseHelper mydb;
     Button a_button;
     EditText a_username, a_password;
 
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mydb = new DatabaseHelper(this);
 
         a_button = findViewById(R.id.a_button);
         a_username = findViewById(R.id.a_username);
@@ -25,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         a_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Login in", Toast.LENGTH_SHORT).show();
+                
+
             }
         });
     }
