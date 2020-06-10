@@ -5,4 +5,9 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="a_name">Name</string>
+    <string name="a_email">Email</string>
+    <string name="a_phonenumber">Phone Number</string>
+    <string name="a_Cpassword">Confirm Password</string>
+    <string name="a_register">Submit</string>
 </resources>
